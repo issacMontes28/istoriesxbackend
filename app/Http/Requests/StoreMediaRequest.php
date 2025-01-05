@@ -22,7 +22,10 @@ class StoreMediaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'request_id' => 'required|exists:requests,id',
+            'file_path' => 'required|string',
+            'media_type' => 'required|string',
+            'size' => 'required|integer',
         ];
     }
 }

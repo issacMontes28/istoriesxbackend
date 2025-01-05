@@ -9,12 +9,7 @@ class MediaController extends Controller
 {
     public function store(StoreMediaRequest $request)
     {
-        $validated = $request->validate([
-            'request_id' => 'required|exists:requests,id',
-            'file_path' => 'required|string',
-            'media_type' => 'required|string',
-            'size' => 'required|integer',
-        ]);
+        $validated = $request->validated();
 
         $mediaData = Media::create($validated);
 

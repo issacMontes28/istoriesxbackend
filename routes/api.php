@@ -23,7 +23,8 @@ Route::post('/generate-token', function (Request $request) {
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/media', [MediaController::class, 'store']);
     Route::post('/platforms', [PlatformController::class, 'store']);
-    Route::resource('requests', RequestController::class);
+    Route::post('/requests', [RequestController::class, 'store']);
+    //Route::resource('requests', RequestController::class);
     //Route::resource('media', MediaController::class);
     //Route::resource('platforms', PlatformController::class);
 });
