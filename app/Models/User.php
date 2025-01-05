@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -45,5 +46,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function createTokenWithExpiry(string $name, array $abilities = ['*'], $expiresAt = null)
+    {
+        $expiresAt = $expiresAt ?? Carbon::now()->addDays(3);
+        $token = $this->createToken($name, $abilities);
+        $token->accessToken->expires_at = $expiresAt;
+        $token->accessToken->save();
+
+        return $token;
     }
 }

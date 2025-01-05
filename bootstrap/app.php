@@ -12,7 +12,11 @@ return Application::configure(basePath: dirname(__DIR__))
         api: __DIR__. '/../routes/api.php'
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        $middleware->group('api', [
+            \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
+            'throttle:60,1', // You can leave this or remove it if you don't need it
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
