@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import AppRoutes from './routes';
 
 function App() {
-    return <h1>istoriesx</h1>;
+    return <AppRoutes />;
 }
 
-ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+export default App;
